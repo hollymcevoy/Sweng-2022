@@ -97,6 +97,16 @@ Assuming your project is in a folder named "Project" on your Desktop.
 
 Updating/The Development Cycle
 ------------
+
+Neil:
+Ideally all people working on code should have the same working branches at all times. This minimises confusion and limits the possibility of merge conflicts. So before any development work we should do something like
+- check the status of branches. 
+- If branches are behind the remote update the branch by doing ``git pull main`` for example
+- Then again before pushing some update a similar check with ``git status``
+- Then push to the repo
+
+
+
 You now have a git repository, likely with two branches: master and develop. Now bake these laws into your mind and process:
 
 ####You will never commit to ***master*** directly.
