@@ -49,7 +49,7 @@ Milestones of milestones of milestones. In other words:
 	- a social network around source code
 - All you need to do to push to Github:
 
-		git push origin master
+		git push origin main
 
 - Now one could "clone" that repository on another computer and not just get the latest code but the complete revision history on another computer.
 
@@ -136,9 +136,9 @@ Finished with your project?
 - Update the version history in the README.md file
 - Update this to develop as normal.
 
-		git checkout master
+		git checkout main
 		git merge --no-ff develop
-		git push origin master
+		git push origin main
 		git tag v1.0.0
 		git push origin v1.0.0
 
