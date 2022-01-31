@@ -7,6 +7,7 @@ Project members will make further decisions on the implementation at a later dat
 ## Members
 - Neil Shevlin - 2nd year Computer Science and Business - [Github](https://github.com/neilshevlin)
 - Yifan Zhu - 3rd year Computer Science - [Github](https://github.com/yifanzhu1592)
+- Holly McEvoy - 3rd year Computer Science - [Github](https://github.com/hollymcevoy)
 
 ## Structure of this repository
  - learningResources: Contains some curated information that serves to help project members to understand new topics.
