@@ -3,6 +3,9 @@ This is the QnA bot REST API. It is a basic REST API building using typescript, 
 
 ## Getting Started
 
+Prerequisites: 
+- [Node.js](https://nodejs.org/en/)
+
 Navigate to the API folder and install the packages through node package manager
 ```bash
    cd api
