@@ -11,8 +11,9 @@ Navigate to the API folder and install the packages through node package manager
 This will install the required dependencies to your local machine so that you can run the software. 
 
 Run the development server
+
 ```bash
-    npm run dev
-    ```
+   npm run dev
+```
 After running this command you should receive a message in your console that the server is running on port 3000. 
-'QnA API Server running on port: 3000'
+QnA API Server running on port: 3000
