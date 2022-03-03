@@ -1,0 +1,49 @@
+
+.App-color-nav {
+  background-color: #EDF0F1;
+  color: #FFFFFF;
+  font-size: calc(6px + 2vmin);
+}
+
+.App-body {
+  background-color: #FFFFFF;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.App-footer {
+  text-align: center;
+  font-size: 12px;
+  font-family: sans-serif;
+  padding: 100px;
+}
+
+.App-footer-image {
+  max-height: 50px;
+  max-width: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 5px;
+}
+
+.App-Page-Header{
+  text-align: center;
+  font-size: 36px;
+  font-family: sans-serif;
+  padding-top: 15px;
+}
+
+.Accordion{
+  
+}
+
+.Edit{
+  background-color: #063f12;
+  text-align: center;
+}
+
+.Chatbot{
+  padding-top: 100px;
+  text-align: center;
+
+}
