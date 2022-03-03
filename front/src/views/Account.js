@@ -1,5 +1,5 @@
 import NavbarComp from "../components/NavbarComp";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "../components/login";
 import SignUp from "../components/signUpComponent";
 import Button from "react-bootstrap/esm/Button";
@@ -13,11 +13,11 @@ function Account() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Link to={"/sign-in"}><Button>Click</Button></Link>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/sign-in" component={Login} />
-              <Route path="/sign-up" component={SignUp} />
-            </Switch>
+            <Routes>
+              <Route exact path="/" element={<Login />} />
+              <Route exact path="/sign-in" element={<Login/>} />
+              <Route path="/sign-up" element={<SignUp/>} />
+            </Routes>
           </div>
         </div>
       </div>
