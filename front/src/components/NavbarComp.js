@@ -16,12 +16,10 @@ class NavbarComp extends Component {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/upload">Upload</Nav.Link>
               <Nav.Link href="/chatbot">Chatbot</Nav.Link>
-              <Nav.Link href="/qnakb">QnA Knowledgebase</Nav.Link>
-
-
+              <Nav.Link href="/knowledgebase">QnA Knowledgebase</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Item className="ml-auto">
-                <Nav.Link href="/Account">Account</Nav.Link>
+                <Nav.Link href="/account">Account</Nav.Link>
               </Nav.Item>
 
             </Nav>
