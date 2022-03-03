@@ -11,13 +11,9 @@ import Chatbot from './views/Chatbot';
 import Account from './views/Account'
 import Footer from './components/Footer';
 
-
-
-
 import {
   Route,
-  Switch,
-  Redirect
+  Routes,
 } from 'react-router-dom';
 
 
@@ -27,15 +23,15 @@ class App extends Component {
     return (
       <div> 
         <div className="App-body">
-          <Switch>
-            <Route exact path="/"  component={Home} />
-            <Route path="/upload" component={Upload} />
-            <Route path="/qnakb" component={QnAKB} />
-            <Route path="/chatbot" component={Chatbot} />
-            <Route path="/about" component={About} />
-            <Route path="/Account" component={Account} /> 
-            <Redirect to="/" />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route exact path="/home"  element={<Home />} />
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/knowledgebase" element={<QnAKB />} />
+            <Route path="/chatbot" element={<Chatbot />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/account" element={<Account />} /> 
+          </Routes>
         </div>
         <Footer />
       </div>
