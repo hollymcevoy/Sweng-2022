@@ -4,7 +4,7 @@
     "description": "The REST api for q-and-a chat bot application",
     "main": "./dist/server.js",
     "scripts": {
-        "dev":"nodemon "
+        "dev":"nodemon"
     },
     "engines": {
         "node": ">=8.0.0"
