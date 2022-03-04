@@ -10,3 +10,31 @@ export let postQuestions = (req: Request, res: Response, next: NextFunction) => 
         return res.status(500).send(error)
     }
 }
+export let getQuestions = (req: Request, res: Response, next: NextFunction) => {
+    try{
+        return res.status(201).send()
+    }catch(error){
+        return res.status(500).send(error)
+    }
+}
+export let updateQuestions = (req: Request, res: Response, next: NextFunction) => {
+    try{
+        return res.status(201).send()
+    }catch(error){
+        return res.status(500).send(error)
+    }
+}
+export let deleteQuestions = (req: Request, res: Response, next: NextFunction) => {
+    try{
+        return res.status(201).send()
+    }catch(error){
+        return res.status(500).send(error)
+    }
+}
+export let getQuestion = (req: Request, res: Response, next: NextFunction) => {
+    try{
+        return res.status(201).send()
+    }catch(error){
+        return res.status(500).send(error)
+    }
+}
