@@ -5,7 +5,17 @@ import { NextFunction, Request, Response } from 'express';
 // The response object is what we used to send back some data to the client.
 export let postQuestions = (req: Request, res: Response, next: NextFunction) => {
     try{
-        return res.status(201).send("Added Document")
+        const docID = req.body.docID
+        if (!docID) {
+            return res.status(500).send("docID does not exist")
+        }
+        const questionText = req.body.questionText
+        if (!questionText || questionText.len() > 100) {
+            return res.status(500).send("questionText is empty or too long")
+        }
+
+        return res.status(201).send(`A question for documentID ${docID}: ${questionText}`)
+
     }catch(error){
         return res.status(500).send(error)
     }
