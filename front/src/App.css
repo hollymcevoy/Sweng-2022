@@ -1,8 +1,9 @@
 
 .App-color-nav {
-  background-color: #EDF0F1;
+  background-color: #79b4f8;
   color: #FFFFFF;
   font-size: calc(6px + 2vmin);
+  padding: 15px;
 }
 
 .App-body {
@@ -28,18 +29,21 @@
 
 .App-Page-Header{
   text-align: center;
-  font-size: 36px;
+  font-size: 24px;
   font-family: sans-serif;
-  padding-top: 15px;
+  padding: 10px;
 }
 
-.Accordion{
-  
-}
-
-.Edit{
-  background-color: #063f12;
+.App-Button{
+  background-color: #396eff;
   text-align: center;
+  font-family: sans-serif;
+  color: #FFFFFF;
+  border-radius: 5px;
+  border-style: solid;
+  margin: 15px;
+  border-width: 10px;
+  border-color: #396eff;
 }
 
 .Chatbot{

@@ -8,16 +8,13 @@ class NavbarComp extends Component {
     return (
       <div>
         <Navbar className="App-color-nav" expand="lg">
-          <Navbar.Brand href="/">
-          </Navbar.Brand>
+          <Navbar.Brand className="App-nav-brand" href="/"> QueryBot22 </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="container-fluid">
-              <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/upload">Upload</Nav.Link>
+              <Nav.Link href="/knowledgebase">Knowledgebase</Nav.Link>
               <Nav.Link href="/chatbot">Chatbot</Nav.Link>
-              <Nav.Link href="/knowledgebase">QnA Knowledgebase</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
               <Nav.Item className="ml-auto">
                 <Nav.Link href="/account">Account</Nav.Link>
               </Nav.Item>

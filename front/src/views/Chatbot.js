@@ -6,7 +6,7 @@ function Chatbot() {
     <div>
       <NavbarComp />
 
-      <p>Chatbot</p>
+      <p className="App-Page-Header">Chatbot</p>
       <ChatbotComp />
       
 

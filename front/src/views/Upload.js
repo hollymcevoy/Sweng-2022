@@ -33,9 +33,10 @@ function Upload() {
     <div>
       <NavbarComp />
       <form onSubmit={handleSubmit}>
-          <h1>React File Upload</h1>
+      <p className="App-Page-Header">Select file to upload</p>
           <input type="file" onChange={handleChange}/>
-          <button type="submit">Upload</button>
+          <p></p>
+          <button className="App-Button" type="submit">Upload</button>
         </form>
     </div>
   );
