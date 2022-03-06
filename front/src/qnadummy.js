@@ -1,26 +1,28 @@
 export const qnadummy = [
   {
-    "que": "What is your favorite color?",
-    "ans": "Purple is my favorite color!",
+    "name": "Document A",
+    "qna": [
+      {
+        "question": "What is A's favorite color?",
+        "answer": "Blue"
+      },
+      {
+        "question": "What is A's second favorite color?",
+        "answer": "Purple"
+      }
+    ]
   },
   {
-    "que": "What is your second favorite color?",
-    "ans": "Blue is my favorite color!",
-  },
-  {
-    "que": "What is your third favorite color?",
-    "ans": "Yellow is my favorite color!",
-  },
-  {
-    "que": "What is your favorite color?",
-    "ans": "Purple is my favorite color!",
-  },
-  {
-    "que": "What is your favorite color?",
-    "ans": "Purple is my favorite color!",
-  },
-  {
-    "que": "What is your favorite color?",
-    "ans": "Purple is my favorite color!",
+    "name": "Document B",
+    "qna": [
+      {
+        "question": "What is B's favorite color?",
+        "answer": "Yellow"
+      },
+      {
+        "question": "What is B's second favorite color?",
+        "answer": "Green"
+      }
+    ]
   }
 ];

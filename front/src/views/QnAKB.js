@@ -8,8 +8,8 @@ function QnAKB() {
       
       <NavbarComp />
       <p className="App-Page-Header">Questions and Answers</p>
-      <Button className="Edit"  href="/">Edit</Button> {' '}
       <QnAAccordion />
+      <Button className="App-Button"  href="/">Edit</Button>
       
     </div>
   );
