@@ -7,11 +7,14 @@ export let postQuestions = (req: Request, res: Response, next: NextFunction) => 
     try{
         const docID = req.body.docID
         if (!docID) {
-            return res.status(500).send("docID does not exist")
+            return res.status(404).send("docID does not exist")
         }
         const questionText = req.body.questionText
-        if (!questionText || questionText.len() > 100) {
-            return res.status(500).send("questionText is empty or too long")
+        if (!questionText) {
+            return res.status(404).send("questionText does not exist")
+        }
+        if (questionText.len() > 100) {
+            return res.status(500).send("questionText is too long")
         }
 
         return res.status(201).send(`A question for documentID ${docID}: ${questionText}`)
