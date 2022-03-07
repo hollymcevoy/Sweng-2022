@@ -49,7 +49,40 @@ export let postDocuments = (req: Request, res: Response, next: NextFunction) => 
 }
 export let getDocuments = (req: Request, res: Response, next: NextFunction) => {
     try{
-        return res.status(200).send("Returned Documents")
+        const dummyData = [
+            {
+                "id": "1",
+                "name": "Computer science prospectus",
+                "description": "This is the prospectus for the Computer Science course.",
+                "createdAt": "2019-01-01T00:00:00.000Z",
+                "updatedAt": "2019-01-01T00:00:00.000Z"
+            },
+            {
+                "id": "2",
+                "name": "Computer science and business prospectus",
+                "description": "This is the prospectus for the Computer Science and Business course.",
+                "createdAt": "2019-01-01T00:00:00.000Z",
+                "updatedAt": "2019-01-01T00:00:00.000Z"
+            },
+            {
+                "id": "3",
+                "name": "Engineering prospectus",
+                "description": "This is the prospectus for the Engineering course.",
+                "createdAt": "2019-01-01T00:00:00.000Z",
+                "updatedAt": "2019-01-01T00:00:00.000Z"
+            }
+        ]
+        const documentId = req.params.documentId
+        if (documentId) {
+            const document = dummyData.find(document => document.id === documentId)
+            if (document) {
+                return res.status(200).send(document)
+            } else {
+                return res.status(404).send(`Document with id ${documentId} does not exist`)
+            }
+        } else {
+            return res.status(200).send(dummyData)
+        }
     }catch(error){
         return res.status(500).send(error)
     }
