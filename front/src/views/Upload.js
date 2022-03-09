@@ -18,6 +18,7 @@ function Upload() {
     event.preventDefault()
     const url = 'http://localhost:3000/v1/documents';
     const formData = new FormData();
+
     formData.append('file', file);
     formData.append('fileName', file.name);
     const config = {
@@ -33,11 +34,11 @@ function Upload() {
     <div>
       <NavbarComp />
       <form onSubmit={handleSubmit}>
-      <p className="App-Page-Header">Select file to upload</p>
+          <p className="App-Page-Header">Please select  a file to upload</p>
           <input type="file" onChange={handleChange}/>
           <p></p>
           <button className="App-Button" type="submit">Upload</button>
-        </form>
+      </form>
     </div>
   );
 }
