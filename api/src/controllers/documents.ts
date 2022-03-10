@@ -47,7 +47,7 @@ export let postDocuments = (req: Request, res: Response, next: NextFunction) => 
         return res.status(500).send(error)
     }
 }
-export let getDocuments = (req: Request, res: Response, next: NextFunction) => {
+export let getDocuments = async (req: Request, res: Response, next: NextFunction) => {
     try{
         const dummyData = [
             {
@@ -73,16 +73,18 @@ export let getDocuments = (req: Request, res: Response, next: NextFunction) => {
             }
         ]
         const documentId = req.params.documentId
-        if (documentId) {
-            const document = dummyData.find(document => document.id === documentId)
-            if (document) {
-                return res.status(200).send(document)
-            } else {
-                return res.status(404).send(`Document with id ${documentId} does not exist`)
-            }
-        } else {
-            return res.status(200).send(dummyData)
+        const azureData = await fetch(`http://azuretestpoint.com/doucments/${documentId}`, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + req.headers.authorization
+            }  
+        })
+        const azureDataJson = await azureData.json()
+        if(azureDataJson.error){
+            return res.status(500).send(azureDataJson.error)
         }
+        return res.status(200).send(azureDataJson)
+        
     }catch(error){
         return res.status(500).send(error)
     }
