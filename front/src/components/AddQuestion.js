@@ -11,8 +11,7 @@ const AddQuestion = () => {
     const [data,setData] = useState({
         question: "",
         answer: "",
-        confidenceScore: "",
-        documentID: ""
+        docID: ""
         
     })
 
@@ -30,7 +29,7 @@ const AddQuestion = () => {
             question: data.question,
             answer: data.question,
             confidenceScore: data.confidenceScore,
-            documentID: data.documentID
+            docID: data.docID
         })
         .then(res=>{
             console.log(res.data)
@@ -40,12 +39,13 @@ const AddQuestion = () => {
     return(
         <div>
                 <h2>Add a Question Below</h2>
-                <form onSubmit={handleAddFormSubmit}>
+                <form onSubmit={handleAddFormSubmit} className = "EditForm">
                     <input 
+                        className = "EditInputs"
                         type = "text" 
                         id="question"
                         required="required" 
-                        placeholder="Enter a question..."
+                        placeholder="Question..."
                         onChange={(e)=>handleAddFormChange(e)}
                         value ={data.question}
 
@@ -54,27 +54,18 @@ const AddQuestion = () => {
                         type = "text" 
                         id="answer"
                         required="required" 
-                        placeholder="Enter the answer..."
+                        placeholder="Answer..."
                         onChange={(e)=>handleAddFormChange(e)}
                         value ={data.answer}
 
                     />
                     <input 
                         type = "text" 
-                        id="confidenceScore"
+                        id="docID"
                         required="required" 
-                        placeholder="Enter the answer..."
-                        onChange={(e)=>handleAddFormChange(e)}
-                        value ={data.confidenceScore}
-
-                    />
-                    <input 
-                        type = "text" 
-                        id="documentID"
-                        required="required" 
-                        placeholder="Enter the answer..."
+                        placeholder="Document ID..."
                         onChange={handleAddFormChange}
-                        value ={data.documentID}
+                        value ={data.docID}
 
                     />
                     <button type="submit">Add</button> 
@@ -84,6 +75,7 @@ const AddQuestion = () => {
 };
 
 export default AddQuestion;
+
 
 
 
