@@ -32,3 +32,32 @@ export let postQuestions = async (req: Request, res: Response, next: NextFunctio
         return res.status(500).send(error)
     }
 }
+export let getQuestions = async (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const docName = req.query.docName
+        const api_key = process.env.AZURE_KEY;
+        const azureData = await fetch(`https://sweng-cog.cognitiveservices.azure.com/language/query-knowledgebases/projects/${docName}/qnas?api-version=2021-10-01`, {
+            method: 'GET',
+            headers: {
+                'OCP-APIM-Subscription-Key': api_key,
+                'Content-Type': 'application/json', 
+            },
+        })
+        const azureDataJson = await azureData.json();
+        if (azureData.status === 404) {
+            return res.status(404).send(`Error: ${azureDataJson.error.message}`)
+        }
+        const qnas = azureDataJson.value.map(qna => {
+            return {
+                id: qna.id,
+                question: qna.questions,
+                answer: qna.answer,
+            }
+        })
+        return res.status(200).send(qnas)
+    }
+    catch(error){
+        APILogger.logger.info(error)
+        return res.status(500).send(error)
+    }
+}
