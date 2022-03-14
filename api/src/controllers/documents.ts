@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import {APILogger} from '../utilities/logger';
 import * as bb from 'busboy'
+import fetch from 'node-fetch';
 // Arrow function () =>{} returns a response object with a status code and a message.
 // The response object is what we used to send back some data to the client.
 export let postDocument = (req: Request, res: Response, next: NextFunction) => {
@@ -47,43 +48,25 @@ export let postDocuments = (req: Request, res: Response, next: NextFunction) => 
         return res.status(500).send(error)
     }
 }
-export let getDocuments = (req: Request, res: Response, next: NextFunction) => {
+export let getDocuments = async (req: Request, res: Response, next: NextFunction) => {
     try{
-        const dummyData = [
-            {
-                "id": "1",
-                "name": "Computer science prospectus",
-                "description": "This is the prospectus for the Computer Science course.",
-                "createdAt": "2019-01-01T00:00:00.000Z",
-                "updatedAt": "2019-01-01T00:00:00.000Z"
-            },
-            {
-                "id": "2",
-                "name": "Computer science and business prospectus",
-                "description": "This is the prospectus for the Computer Science and Business course.",
-                "createdAt": "2019-01-01T00:00:00.000Z",
-                "updatedAt": "2019-01-01T00:00:00.000Z"
-            },
-            {
-                "id": "3",
-                "name": "Engineering prospectus",
-                "description": "This is the prospectus for the Engineering course.",
-                "createdAt": "2019-01-01T00:00:00.000Z",
-                "updatedAt": "2019-01-01T00:00:00.000Z"
+        const documentName = req.params.documentId
+        const api_key = process.env.AZURE_KEY;
+        const azureData = await fetch(`https://sweng-cog.cognitiveservices.azure.com/language/query-knowledgebases/projects/SwengQNA/sources?api-version=2021-10-01`, {
+            method: 'GET',
+            headers: {
+                'OCP-APIM-Subscription-Key': api_key,
+                'Content-Type': 'application/json', 
             }
-        ]
-        const documentId = req.params.documentId
-        if (documentId) {
-            const document = dummyData.find(document => document.id === documentId)
-            if (document) {
-                return res.status(200).send(document)
-            } else {
-                return res.status(404).send(`Document with id ${documentId} does not exist`)
-            }
-        } else {
-            return res.status(200).send(dummyData)
+        })
+        const azureDataJson = await azureData.json();
+        if(azureData.status === 200){
+            return res.status(200).send(azureDataJson)
+        }else{
+            return res.status(404).send('Not Found')
         }
     }catch(error){
+        APILogger.logger.info(`${error}`)
         return res.status(500).send(error)
     }
 }
