@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import {APILogger} from '../utilities/logger';
 import * as bb from 'busboy'
+import fetch from 'node-fetch';
 // Arrow function () =>{} returns a response object with a status code and a message.
 // The response object is what we used to send back some data to the client.
 export let postDocument = (req: Request, res: Response, next: NextFunction) => {
@@ -49,43 +50,23 @@ export let postDocuments = (req: Request, res: Response, next: NextFunction) => 
 }
 export let getDocuments = async (req: Request, res: Response, next: NextFunction) => {
     try{
-        const dummyData = [
-            {
-                "id": "1",
-                "name": "Computer science prospectus",
-                "description": "This is the prospectus for the Computer Science course.",
-                "createdAt": "2019-01-01T00:00:00.000Z",
-                "updatedAt": "2019-01-01T00:00:00.000Z"
-            },
-            {
-                "id": "2",
-                "name": "Computer science and business prospectus",
-                "description": "This is the prospectus for the Computer Science and Business course.",
-                "createdAt": "2019-01-01T00:00:00.000Z",
-                "updatedAt": "2019-01-01T00:00:00.000Z"
-            },
-            {
-                "id": "3",
-                "name": "Engineering prospectus",
-                "description": "This is the prospectus for the Engineering course.",
-                "createdAt": "2019-01-01T00:00:00.000Z",
-                "updatedAt": "2019-01-01T00:00:00.000Z"
-            }
-        ]
-        const documentId = req.params.documentId
-        const azureData = await fetch(`http://azuretestpoint.com/doucments/${documentId}`, {
+        const documentName = req.params.documentId
+        const api_key = process.env.AZURE_KEY;
+        const azureData = await fetch(`https://sweng-cog.cognitiveservices.azure.com/language/query-knowledgebases/projects/SwengQNA/sources?api-version=2021-10-01`, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + req.headers.authorization
-            }  
+                'OCP-APIM-Subscription-Key': api_key,
+                'Content-Type': 'application/json', 
+            }
         })
-        const azureDataJson = await azureData.json()
-        if(azureDataJson.error){
-            return res.status(500).send(azureDataJson.error)
+        const azureDataJson = await azureData.json();
+        if(azureData.status === 200){
+            return res.status(200).send(azureDataJson)
+        }else{
+            return res.status(404).send('Not Found')
         }
-        return res.status(200).send(azureDataJson)
-        
     }catch(error){
+        APILogger.logger.info(`${error}`)
         return res.status(500).send(error)
     }
 }
