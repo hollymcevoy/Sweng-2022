@@ -9,8 +9,7 @@ function QnAKB() {
       <NavbarComp />
       <p className="App-Page-Header">Questions and Answers</p>
       <QnAAccordion />
-      <Button className="App-Button"  href="/">Edit</Button>
-      
+      <Button className="App-Button"  href="/editknowledgebase">Add a Question</Button>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import QnAKB from './views/QnAKB';
 import Chatbot from './views/Chatbot';
 import Account from './views/Account'
 import Footer from './components/Footer';
+import AddQuestion from './components/AddQuestion';
 
 import {
   Route,
@@ -31,6 +32,7 @@ class App extends Component {
             <Route path="/chatbot" element={<Chatbot />} />
             <Route path="/about" element={<About />} />
             <Route path="/account" element={<Account />} /> 
+              <Route path="/editknowledgebase" element={<AddQuestion />} />
           </Routes>
         </div>
         <Footer />
