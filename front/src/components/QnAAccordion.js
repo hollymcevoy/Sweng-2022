@@ -16,6 +16,7 @@ class QnAAccordion extends Component {
   }
   componentDidMount(){
     this.getDocuments()
+    this.getQuestions()
   }
   handleChange(e){
     this.setState({documentName:e.label, documentSource:e.source})
@@ -34,8 +35,10 @@ class QnAAccordion extends Component {
     this.setState({documentsList: documentsList})
   }
   async getQuestions (){
-    const response = await axios.get('http://localhost:3000/v1/questions');
-    const questions = response.questions;
+    const docName = this.state.documentName;
+    console.log(docName)
+    const response = await axios.get(`http://localhost:3000/v1/questions?docName=SwengQNA`);
+    const questions = response.data.question;
     this.setState({questions: questions})
   }
   render() {
