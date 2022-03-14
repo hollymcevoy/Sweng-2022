@@ -1,4 +1,5 @@
 // import everything from the core express libraries
+import * as bodyParser from 'body-parser';
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import * as express from 'express';
@@ -19,6 +20,7 @@ class App {
     // Assign the app property to an instance of the express.application object type.
     constructor() {
         this.app = express();
+        this.app.use(bodyParser.json());
         this.indexRoute.routes(this.app);
         this.documentRoute.routes(this.app)
         this.questionsRoute.routes(this.app)
