@@ -20,7 +20,17 @@ export let getDocument = (req: Request, res: Response, next: NextFunction) => {
 }
 export let postDocuments = (req: Request, res: Response, next: NextFunction) => {
     try{
-        
+        // add file type and size filter
+        // needs improvements
+        const fileName = req.body.fileName
+        const fileSize = req.body.fileSize
+        if (!(fileName.endsWith('.tsv') || fileName.endsWith('.pdf') || fileName.endsWith('.txt') || fileName.endsWith('.docx') || fileName.endsWith('.xlsx'))) {
+            return res.status(500).send("File type is not accepted")
+        }
+        if (fileSize > 1024) {
+            return res.status(500).send("File length is too long")
+        }
+
         const busboy = bb({headers: req.headers});
         console.log(busboy)
         let DataFile = '';
