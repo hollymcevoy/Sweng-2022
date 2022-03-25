@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/index.js"],"names":["SpeechServices"],"mappings":";;;;;;;;;AAAA;;eAEeA,uB","sourcesContent":["import SpeechServices from './SpeechServices';\n\nexport default SpeechServices;\n"],"file":"index.js"}

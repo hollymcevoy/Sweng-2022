@@ -1,0 +1,1 @@
+{"version":3,"file":"AdaptiveCardsContext.d.ts","sourceRoot":"","sources":["../../src/adaptiveCards/AdaptiveCardsContext.ts"],"names":[],"mappings":"AAEA,OAAO,oBAAoB,MAAM,+BAA+B,CAAC;AAEjE,aAAK,oBAAoB,GAAG;IAC1B,oBAAoB,EAAE,oBAAoB,CAAC;IAC3C,mBAAmB,EAAE,GAAG,CAAC;CAC1B,CAAC;AAEF,QAAA,MAAM,oBAAoB,+CAAiD,CAAC;AAE5E,eAAe,oBAAoB,CAAC"}

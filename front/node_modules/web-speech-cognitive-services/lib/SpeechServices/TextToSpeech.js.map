@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/SpeechServices/TextToSpeech.js"],"names":["createSpeechSynthesisPonyfill"],"mappings":";;;;;;;;;AAAA;;eAEeA,sC","sourcesContent":["import createSpeechSynthesisPonyfill from './TextToSpeech/createSpeechSynthesisPonyfill';\n\nexport default createSpeechSynthesisPonyfill;\n"],"file":"TextToSpeech.js"}

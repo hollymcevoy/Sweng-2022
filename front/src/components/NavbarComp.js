@@ -18,7 +18,6 @@ class NavbarComp extends Component {
               <Nav.Item className="ml-auto">
                 <Nav.Link href="/account">Account</Nav.Link>
               </Nav.Item>
-
             </Nav>
           </Navbar.Collapse>
         </Navbar>
