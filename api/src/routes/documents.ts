@@ -9,7 +9,6 @@ export class DocumentRoute{
         documentsController.postDocuments
       )
       app.route('/v1/documents').get(
-        authMiddleware,
         documentsController.getDocuments
       )
       app.route('/v1/documents/:id').patch(
@@ -21,7 +20,6 @@ export class DocumentRoute{
         documentsController.deleteDocuments
       )
       app.route('/v1/documents/:id').get(
-        authMiddleware,
         documentsController.getDocument
       ) 
     }
