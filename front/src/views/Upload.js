@@ -24,6 +24,7 @@ function Upload() {
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
+        
       },
     };
     axios.post(url, formData, config).then((response) => {console.log(response.data);});
