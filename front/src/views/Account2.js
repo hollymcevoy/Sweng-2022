@@ -8,8 +8,6 @@ function About() {
     <div>
       <NavbarComp />
       <Profile />
-      <LogoutButton/>
-      <LoginButton/>
     </div>
   );
 }

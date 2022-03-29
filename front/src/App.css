@@ -27,6 +27,21 @@
   padding-top: 5px;
 }
 
+.App-load-image {
+  max-height: 100px;
+  max-width: auto;
+}
+
+.App-feature-image {
+  max-height: 300px;
+  max-width: auto;
+  padding-bottom: 50px;
+}
+
+.App-feature {
+  background-color: #1D2735;
+}
+
 .App-Page-Header{
   text-align: center;
   font-size: 24px;

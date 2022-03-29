@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import LogoutButton from "../components/LogoutButton";
 
 class NavbarComp extends Component {
   render() {
@@ -15,9 +17,16 @@ class NavbarComp extends Component {
               <Nav.Link href="/upload">Upload</Nav.Link>
               <Nav.Link href="/knowledgebase">Knowledgebase</Nav.Link>
               <Nav.Link href="/chatbot">Chatbot</Nav.Link>
-              <Nav.Item className="ml-auto">
-                <Nav.Link href="/account">Account</Nav.Link>
-              </Nav.Item>
+              
+            </Nav>
+          </Navbar.Collapse>
+          <Navbar.Collapse className="justify-content-end">
+            <Nav>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/account">Profile</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <LogoutButton />
+            </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

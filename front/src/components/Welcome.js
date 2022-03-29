@@ -6,10 +6,10 @@ class Welcome extends Component {
   render() {
     return (
       <div>
-        <p className="App-Page-Header">Welcome to QueryBot22</p>
+        
         <Card className="text-center">
           <Card.Body>
-          <p>This is an application that will take in unstructured data and convert it into questions and answers. These can be seen on the knowledge base tab once you upload your first document! You can also query the chatbot for a faster result.</p>
+          <p>Try uploading a document to your knowledge base!</p>
           </Card.Body>
         </Card>
 

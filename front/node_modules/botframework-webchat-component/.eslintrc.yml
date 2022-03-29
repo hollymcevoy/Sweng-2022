@@ -1,6 +1,0 @@
-extends:
-  - ../../.eslintrc.react.yml
-
-# This package is expected to run inside a web browser.
-env:
-  browser: true
