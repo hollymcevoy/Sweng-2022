@@ -12,6 +12,7 @@ class Welcome extends Component {
        <Carousel>
         <Carousel.Item>   
         <img
+            className="App-feature-image"
             src={upload}
             alt="Image One"
           />
