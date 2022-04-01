@@ -1,3 +1,4 @@
+import { auth } from 'express-oauth2-jwt-bearer';
 import * as documentsController from '../controllers/documents';
 import { authMiddleware } from '../utilities/auth0';
 // Export a class that has a property for request handlers. 
@@ -22,5 +23,9 @@ export class DocumentRoute{
       app.route('/v1/documents/:id').get(
         documentsController.getDocument
       ) 
+      app.route('/v1/documents/:id/status').get(
+        authMiddleware,
+        documentsController.getDocumentStatus
+      )
     }
 }

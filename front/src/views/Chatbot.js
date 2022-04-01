@@ -1,12 +1,11 @@
 import NavbarComp from '../components/NavbarComp';
-import ChatbotComp from '../components/Chatbot';
+import ChatbotComp from '../components/chat';
 
 function Chatbot() {
   return (
     <div>
       <NavbarComp />
 
-      <p className="App-Page-Header">Chatbot</p>
       <ChatbotComp />
       
 
