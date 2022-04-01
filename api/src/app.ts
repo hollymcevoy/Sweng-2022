@@ -6,6 +6,7 @@ import * as express from 'express';
 
 import { DocumentRoute } from './routes/documents';
 import { QuestionsRoute } from './routes/questions';
+import { FeedbackRoute } from './routes/feedback';
 import { IndexRoute } from './routes/index';
 
 // The App class is configured here and an instance of the object class is exported to be used by the main server.ts file.  
@@ -16,6 +17,7 @@ class App {
     public indexRoute: IndexRoute = new IndexRoute();
     public documentRoute: DocumentRoute = new DocumentRoute();
     public questionsRoute: QuestionsRoute = new QuestionsRoute();
+    public feedbackRoute: FeedbackRoute = new FeedbackRoute();
     
     // Assign the app property to an instance of the express.application object type.
     constructor() {
@@ -24,6 +26,7 @@ class App {
         this.indexRoute.routes(this.app);
         this.documentRoute.routes(this.app)
         this.questionsRoute.routes(this.app)
+        this.feedbackRoute.routes(this.app)
         // Middleware function that has access to incoming requests and outgoing responses. Parses them as JSON.
         this.app.use(express.json());
         this.app.use(
