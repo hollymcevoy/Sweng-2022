@@ -19,6 +19,11 @@ export let postQuestions = async (req: Request, res: Response, next: NextFunctio
             body: JSON.stringify({
                 "question": question,
                 "top": 3,
+                "answerSpanRequest": {
+                    "enable": true,
+                    "confidenceScoreThreshold": 0.5,
+                    "topAnswersWithSpan": 1
+                  },
             })
         })
         const azureDataJson = await azureData.json();
