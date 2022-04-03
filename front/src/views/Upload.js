@@ -1,5 +1,5 @@
-import NavbarComp from '../components/NavbarComp';
-
+import NavBar from '../components/TheNavbar';
+import { Grid, Box, Card, CardContent, CardActions, Button, Typography, CardActionArea } from '@mui/material';
 import React, {useState} from 'react';
 import axios from 'axios';
 
@@ -33,13 +33,33 @@ function Upload() {
 
   return (
     <div>
-      <NavbarComp />
-      <form onSubmit={handleSubmit}>
+      <NavBar />
+      {/* <form onSubmit={handleSubmit}>
           <p className="App-Page-Header">Please select  a file to upload</p>
           <input type="file" onChange={handleChange}/>
           <p></p>
           <button className="App-Button" type="submit">Upload</button>
-      </form>
+      </form> */}
+      {/* Grid that is centered vertically and horizontally */}
+      <Grid container  alignItems="center" style={{marginTop: "10vh"}}>
+        {/* Box that is centered vertically and horizontally and takes up 6 cols */}
+        <Box m="auto" >
+          {/* Card with click action  */}
+          <CardActionArea onClick={handleChange}>
+            {/* An input that is the same size as the parent */}
+          
+          <Card elevation={0} style={{height: "50vh", width: "50vw", border: "3px dashed grey"}}>
+            
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  Upload
+                </Typography>
+                <input type="file" onChange={handleChange}/>
+              </CardContent>
+          </Card>
+          </CardActionArea>
+        </Box>
+      </ Grid>
     </div>
   );
 }

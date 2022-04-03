@@ -1,15 +1,13 @@
-import NavbarComp from '../components/NavbarComp';
+import NavBar from '../components/TheNavbar';
 import QnAAccordion from '../components/QnAAccordion';
-import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 
 function QnAKB() {
   return (
     <div>
       
-      <NavbarComp />
-      <p className="App-Page-Header">Questions and Answers</p>
+      <NavBar />
       <QnAAccordion />
-      <Button className="App-Button"  href="/editknowledgebase">Add a Question</Button>
     </div>
   );
 }
