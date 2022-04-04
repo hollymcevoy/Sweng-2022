@@ -3,8 +3,6 @@ import { Grid, Box, Card, CardContent, CardActions, Button, Typography } from '@
 import * as React from 'react';
 import Footer from '../components/TheFooter';
 function Home() {
-  // const that we can store some text in
-  // array with different objects with their titles and text
   const [text, setText] = React.useState([
     {
       title: 'Upload',
