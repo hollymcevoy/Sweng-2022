@@ -1,9 +1,8 @@
-import NavbarComp from '../components/NavbarComp';
-
+import NavBar from '../components/TheNavbar';
 function About() {
   return (
     <div>
-      <NavbarComp />
+      <NavBar />
       <p>About</p>
     </div>
   );

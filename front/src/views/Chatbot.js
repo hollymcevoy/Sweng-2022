@@ -1,14 +1,10 @@
-import NavbarComp from '../components/NavbarComp';
+import NavBar from '../components/TheNavbar';
 import ChatbotComp from '../components/chat';
-
 function Chatbot() {
   return (
     <div>
-      <NavbarComp />
-
+      <NavBar />
       <ChatbotComp />
-      
-
     </div>
   );
 }

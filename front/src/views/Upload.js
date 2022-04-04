@@ -1,5 +1,5 @@
-import NavbarComp from '../components/NavbarComp';
-
+import NavBar from '../components/TheNavbar';
+import { Grid, Box, Card, CardContent, CardActions, Button, Typography, CardActionArea } from '@mui/material';
 import React, {useState} from 'react';
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ function Upload() {
   
   function handleSubmit(event) {
     event.preventDefault()
-    const url = 'http://localhost:3000/v1/documents';
+    const url = 'https://sweng-api-node.azurewebsites.net/v1/documents';
     const formData = new FormData();
 
     formData.append('file', file);
@@ -33,13 +33,22 @@ function Upload() {
 
   return (
     <div>
-      <NavbarComp />
-      <form onSubmit={handleSubmit}>
-          <p className="App-Page-Header">Please select  a file to upload</p>
-          <input type="file" onChange={handleChange}/>
-          <p></p>
-          <button className="App-Button" type="submit">Upload</button>
-      </form>
+      <NavBar />
+      <Grid container  alignItems="center" style={{marginTop: "10vh"}}>
+        <Box m="auto" >
+          <CardActionArea onClick={handleChange}>
+          <Card elevation={0} style={{height: "50vh", width: "50vw", border: "3px dashed grey"}}>
+            
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  Upload
+                </Typography>
+                <input type="file" onChange={handleChange}/>
+              </CardContent>
+          </Card>
+          </CardActionArea>
+        </Box>
+      </ Grid>
     </div>
   );
 }

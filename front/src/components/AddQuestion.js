@@ -1,7 +1,4 @@
 import React, {useState} from 'react';
-import "../App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { nanoid } from "nanoid";
 import axios from 'axios';
 
 const AddQuestion = () => {

@@ -1,13 +1,14 @@
-import NavbarComp from "../components/NavbarComp";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Login from "../components/login";
-import SignUp from "../components/signUpComponent";
-import Button from "react-bootstrap/esm/Button";
+import Login from "../components/Login";
+import SignUp from "../components/Signup";
+import Button from '@mui/material/Button';
+import NavBar from '../components/TheNavbar';
+
 function Account() {
   return (
     <Router>
       <div>
-        <NavbarComp />
+        <NavBar />
       </div>
       <div className="App">
         <div className="auth-wrapper">

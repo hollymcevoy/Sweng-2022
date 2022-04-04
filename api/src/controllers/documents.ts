@@ -121,8 +121,13 @@ export let getDocuments = async (req: Request, res: Response, next: NextFunction
         const azureDataJson = await azureData.json();
         if(azureData.status === 200){
             return res.status(200).send(azureDataJson)
-        }else{
+        }else if(azureData.status === 404){
+            console.log(azureDataJson)
             return res.status(404).send('Not Found')
+        }
+        else if(azureData.status === 401){
+            console.log(azureDataJson)
+            return res.status(500).send('Internal Server Error')
         }
     }catch(error){
         APILogger.logger.info(`${error}`)

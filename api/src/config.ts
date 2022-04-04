@@ -1,7 +1,7 @@
 // config to load in environment variables
 import * as dotenv from 'dotenv';
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: 'api/.env' });
 
 export const PORT = String(process.env.PORT);
 export const auth0_domain = String(process.env.AUTH0_DOMAIN);

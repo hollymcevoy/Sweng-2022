@@ -39,7 +39,7 @@ class Chat extends Component {
         this.setState({message: ""});
         this.setState({messages: [...this.state.messages, message]});
 
-        const response = await axios.post('http://localhost:3000/v1/questions', {
+        const response = await axios.post('https://sweng-api-node.azurewebsites.net/v1/questions', {
             question: message.text,
             docName: 'SwengQNA'
         }); 
@@ -62,7 +62,6 @@ class Chat extends Component {
         }catch(e){
             console.log(e);
         }
-        // if the short answer is empty, use the long answer
         if(botMessage.shortAnswer === ''){
             botMessage.text = botMessage.longAnswer;
         } else {
@@ -75,7 +74,7 @@ class Chat extends Component {
       };
       async addFeedback(){
         console.log(this.state.qnaId, this.state.userId, this.state.recentQuestion.text);
-        const response = await axios.post('http://localhost:3000/v1/questions/feedback', {
+        const response = await axios.post('https://sweng-api-node.azurewebsites.net/v1/questions/feedback', {
             qnaId: this.state.qnaId,
             userId: this.state.userId,
             question: this.state.recentQuestion.text,
@@ -91,7 +90,7 @@ class Chat extends Component {
         this.setState({documentName:e.label, documentSource:e.source})
        }
        async getDocuments (){
-        const response = await axios.get('http://localhost:3000/v1/documents');
+        const response = await axios.get('https://sweng-api-node.azurewebsites.net/v1/documents');
         const documents = response.data.value;
     
         const documentsList = documents.reduce((res, doc) => {
@@ -105,64 +104,107 @@ class Chat extends Component {
 
       render() {
         return (
-            <div>
-              <Grid container>
-                  <Grid item xs={12} >
-                      <Typography variant="h5" className="header-message">Chat</Typography>
-                  </Grid>
+          <div>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="h5" className="header-message">
+                  Chat
+                </Typography>
               </Grid>
-                <Grid container component={Paper} style={{"width": "100%", "height": "80vh"}}>
-                    <Grid item xs={3} style={{"borderRight":"1px solid #e0e0e0"}}>
-                        <Typography variant="h6" className="header-message">Documents</Typography>
-                        <Divider />
-                        <Grid item xs={12} style={{padding: '10px'}}>
-                          <TextField id="outlined-basic-email" label="Search" variant="outlined" fullWidth />
-                        </Grid>
-                        <Divider />
-                        <SideBar />
-                    </Grid>
-                  <Grid item xs={9}>
-                      <List style={{"height":"70vh", "overflowY": "auto"}}>
-                            {this.state.messages.map((message, key) => {
-                                return (
-                                    <ListItem key={key}>
-                                       <Grid container>
-                                            <Grid item xs={12}>
-                                                {/* ternary expression for the type of message and whether the shortAnswer exists */}
-                                                {message.type === "bot" ? 
-                                                    <ListItemText primary={message.text} style={{"textAlign": "left"}}/>
-                                                    :
-                                                    <ListItemText primary={message.text} style={{"textAlign": "right"}}/>
-                                                }
-                                            </Grid>
-                                       </Grid>
-                                    </ListItem>
-                                );
-                            })}
-                        </List>
-                        
-                      <Divider />
-                      
-                      <Grid container style={{padding: '20px'}}>
-                          {/* Grid with padding on the left and right */}
-                            <Grid item >
-                                <IconButton aria-label="delete"><ThumbUpIcon color="success" onClick={() => this.addFeedback()}/></IconButton>
-                                <IconButton aria-label="delete"><ThumbDownIcon color="error" onClick={() => this.addFeedback()}/></IconButton>
-                            </Grid>
-                            <Grid item xs={11} md={10} >
-                                    <TextField id="outlined-basic-email" label="Message" variant="outlined"  fullWidth value={this.state.message} onChange={(e) => this.setState({message: e.target.value})} onKeyPress={(e) => {
-                                        if(e.key === 'Enter'){
-                                            this.sendMessage();
-                                        }
-                                    }}/>
-                            </Grid>
-                          <Grid xs={1} align="right">
-                            <Fab  color="primary" aria-label="add" onClick={() => this.sendMessage()}><SendIcon /></Fab>
+            </Grid>
+            <Grid
+              container
+              component={Paper}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <Grid item xs={3} style={{ borderRight: "1px solid #e0e0e0" }}>
+                <Typography variant="h6" className="header-message">
+                  Documents
+                </Typography>
+                <Divider />
+                <Grid item xs={12} style={{ padding: "10px" }}>
+                  <TextField
+                    id="outlined-basic-email"
+                    label="Search"
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>
+                <Divider />
+                <SideBar />
+              </Grid>
+              <Grid item xs={9}>
+                <List style={{ height: "70vh", overflowY: "auto" }}>
+                  {this.state.messages.map((message, key) => {
+                    return (
+                      <ListItem key={key}>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            {message.type === "bot" ? (
+                              <ListItemText
+                                primary={message.text}
+                                style={{ textAlign: "left" }}
+                              />
+                            ) : (
+                              <ListItemText
+                                primary={message.text}
+                                style={{ textAlign: "right" }}
+                              />
+                            )}
                           </Grid>
-                      </Grid>
+                        </Grid>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+
+                <Divider />
+
+                <Grid container style={{ padding: "20px" }}>
+                  <Grid item>
+                    <IconButton aria-label="delete">
+                      <ThumbUpIcon
+                        color="success"
+                        onClick={() => this.addFeedback()}
+                      />
+                    </IconButton>
+                    <IconButton aria-label="delete">
+                      <ThumbDownIcon
+                        color="error"
+                        onClick={() => this.addFeedback()}
+                      />
+                    </IconButton>
                   </Grid>
+                  <Grid item xs={11} md={10}>
+                    <TextField
+                      id="outlined-basic-email"
+                      label="Message"
+                      variant="outlined"
+                      fullWidth
+                      value={this.state.message}
+                      onChange={(e) =>
+                        this.setState({ message: e.target.value })
+                      }
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          this.sendMessage();
+                        }
+                      }}
+                    />
+                  </Grid>
+                  <Grid xs={1} align="right">
+                    <Fab
+                      color="primary"
+                      aria-label="add"
+                      onClick={() => this.sendMessage()}
+                    >
+                      <SendIcon />
+                    </Fab>
+                  </Grid>
+                </Grid>
               </Grid>
-            </div>
+            </Grid>
+          </div>
         );
       } 
 }
