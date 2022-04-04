@@ -62,7 +62,6 @@ class Chat extends Component {
         }catch(e){
             console.log(e);
         }
-        // if the short answer is empty, use the long answer
         if(botMessage.shortAnswer === ''){
             botMessage.text = botMessage.longAnswer;
         } else {
@@ -141,7 +140,6 @@ class Chat extends Component {
                       <ListItem key={key}>
                         <Grid container>
                           <Grid item xs={12}>
-                            {/* ternary expression for the type of message and whether the shortAnswer exists */}
                             {message.type === "bot" ? (
                               <ListItemText
                                 primary={message.text}
@@ -163,7 +161,6 @@ class Chat extends Component {
                 <Divider />
 
                 <Grid container style={{ padding: "20px" }}>
-                  {/* Grid with padding on the left and right */}
                   <Grid item>
                     <IconButton aria-label="delete">
                       <ThumbUpIcon
