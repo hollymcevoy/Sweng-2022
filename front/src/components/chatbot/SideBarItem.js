@@ -6,7 +6,6 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import axios from 'axios';
 class SideBar extends Component {
-    // accept props from parent component
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +18,7 @@ class SideBar extends Component {
         };
     }
     async getDocumentList(){
-        const response = await axios.get('http://localhost:3000/v1/documents');
+        const response = await axios.get('https://sweng-api-node.azurewebsites.net/v1/documents');
         const documents = response.data.value;
 
         const documentsList = documents.reduce((res, doc) => {
@@ -31,7 +30,6 @@ class SideBar extends Component {
 
         this.setState({documentsList: documentsList})
     }
-    // Before the component mounts, get the documents list
     componentDidMount(){
         this.getDocumentList();
     }

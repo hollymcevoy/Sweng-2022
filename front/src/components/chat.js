@@ -39,7 +39,7 @@ class Chat extends Component {
         this.setState({message: ""});
         this.setState({messages: [...this.state.messages, message]});
 
-        const response = await axios.post('http://localhost:3000/v1/questions', {
+        const response = await axios.post('https://sweng-api-node.azurewebsites.net/v1/questions', {
             question: message.text,
             docName: 'SwengQNA'
         }); 
@@ -75,7 +75,7 @@ class Chat extends Component {
       };
       async addFeedback(){
         console.log(this.state.qnaId, this.state.userId, this.state.recentQuestion.text);
-        const response = await axios.post('http://localhost:3000/v1/questions/feedback', {
+        const response = await axios.post('https://sweng-api-node.azurewebsites.net/v1/questions/feedback', {
             qnaId: this.state.qnaId,
             userId: this.state.userId,
             question: this.state.recentQuestion.text,
@@ -91,7 +91,7 @@ class Chat extends Component {
         this.setState({documentName:e.label, documentSource:e.source})
        }
        async getDocuments (){
-        const response = await axios.get('http://localhost:3000/v1/documents');
+        const response = await axios.get('https://sweng-api-node.azurewebsites.net/v1/documents');
         const documents = response.data.value;
     
         const documentsList = documents.reduce((res, doc) => {

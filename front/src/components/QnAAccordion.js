@@ -24,7 +24,7 @@ class QnAAccordion extends Component {
     this.setState({documentName:e.label, documentSource:e.source})
    }
   async getDocuments (){
-    const response = await axios.get('http://localhost:3000/v1/documents');
+    const response = await axios.get('https://sweng-api-node.azurewebsites.net/v1/documents');
     const documents = response.data.value;
 
     const documentsList = documents.reduce((res, doc) => {
@@ -39,7 +39,7 @@ class QnAAccordion extends Component {
   async getQuestions (){
     const docName = this.state.documentName;
     console.log(docName)
-    const response = await axios.get(`http://localhost:3000/v1/questions?docName=SwengQNA`);
+    const response = await axios.get(`https://sweng-api-node.azurewebsites.net/v1/questions?docName=SwengQNA`);
     const questions = response.data.question;
     this.setState({questions: questions})
   }
@@ -48,7 +48,6 @@ class QnAAccordion extends Component {
       <div>
           <Grid container  alignItems="center" style={{marginTop: "10vh"}}>
             <Box m="auto" >
-              {/* List of items and a loop */}
               <List
                 sx={{
                   width: '100%',
