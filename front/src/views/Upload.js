@@ -1,5 +1,5 @@
 import NavBar from '../components/TheNavbar';
-import { Grid, Box, Card, CardContent, CardActions, Button, Typography, CardActionArea } from '@mui/material';
+import { Grid, Box, Card, CardContent, TextField, Button, Typography, CardActionArea } from '@mui/material';
 import React, {useState} from 'react';
 import axios from 'axios';
 
@@ -37,7 +37,7 @@ function Upload() {
       <Grid container  alignItems="center" style={{marginTop: "10vh"}}>
         <Box m="auto" >
           <CardActionArea onClick={handleChange}>
-          <Card elevation={0} style={{height: "50vh", width: "50vw", border: "3px dashed grey"}}>
+          <Card elevation={0} style={{height: "20vh", width: "20vw", border: "3px dashed grey"}}>
             
               <CardContent>
                 <Typography variant="h5" component="h2">
@@ -47,7 +47,21 @@ function Upload() {
               </CardContent>
           </Card>
           </CardActionArea>
+          <Button onClick={handleSubmit} variant="outlined" style={{ marginTop: "1vh" }}>Add file</Button>
         </Box>
+        <Box m="auto" >
+          
+          <Card elevation={0} style={{height: "20vh", width: "20vw", border: "3px solid grey"}}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                 Paste Url
+                </Typography>
+                <TextField id="outlined-basic" label="Add a URL to a page" variant="outlined" />
+              </CardContent>
+          </Card>
+          <Button onClick={handleSubmit} variant="outlined" style={{ marginTop: "1vh" }}>Add Url</Button>
+        </Box>
+        
       </ Grid>
     </div>
   );
