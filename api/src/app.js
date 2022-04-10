@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 var winston = require("winston");
 var expressWinston = require("express-winston");
 var express = require("express");
+var multer = require("multer");
 var documents_1 = require("./routes/documents");
 var questions_1 = require("./routes/questions");
 var feedback_1 = require("./routes/feedback");
@@ -25,6 +26,9 @@ var App = /** @class */ (function () {
         this.feedbackRoute.routes(this.app);
         // Middleware function that has access to incoming requests and outgoing responses. Parses them as JSON.
         this.app.use(express.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(multer().array());
+        this.app.use(express.static('public'));
         this.app.use(expressWinston.logger({
             transports: [new winston.transports.Console()]
         }));
