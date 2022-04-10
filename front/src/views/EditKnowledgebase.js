@@ -1,12 +1,11 @@
-import NavbarComp from '../components/NavbarComp';
+import NavBar from '../components/TheNavbar';
 import AddQuestion from '../components/AddQuestion';
-import NavbarComp from '../components/NavbarComp';
 
 function EditKnowledgeBase() {
   return (
     <div>
-        <NavbarComp />
-        <AddQuestion />
+        <NavBar />
+        <AddQuestion /> 
     </div>
   );
 }

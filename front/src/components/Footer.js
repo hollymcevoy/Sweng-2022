@@ -1,8 +1,6 @@
 import microsoft_logo from '../images/microsoft_logo.png'; 
 import tcd_logo from '../images/tcd_logo.jpeg';
 import React, {Component} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-//import '../styles/Footer.css';
 
 
 class Footer extends Component {

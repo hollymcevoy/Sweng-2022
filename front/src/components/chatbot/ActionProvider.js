@@ -1,4 +1,3 @@
-// ActionProvider starter code
 class ActionProvider {
     constructor(
      createChatBotMessage,

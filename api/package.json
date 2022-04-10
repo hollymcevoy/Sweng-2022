@@ -4,7 +4,17 @@
     "description": "The REST api for q-and-a chat bot application",
     "main": "./dist/server.js",
     "scripts": {
-        "dev": "nodemon"
+        "dev": "nodemon",
+        "build": "npm run clean && tsc",
+        "clean": "rimraf dist && rimraf reports",
+        "lint": "tslint ./src/**/*.ts ./test/**/*.spec.ts",
+        "lint:fix": "tslint --fix ./src/**/*.ts ./test/**/*.spec.ts -t verbose",
+        "pretest": "cross-env NODE_ENV=test npm run build && npm run lint",
+        "test": "cross-env NODE_ENV=test mocha --reporter spec --compilers ts:ts-node/register test/**/*.spec.ts --exit",
+        "tsc": "tsc",
+        "prod": "PORT=3000 npm run build && npm run start",
+        "prestart": "node src/config.js",
+        "start": "NODE_ENV=prod node src/server.js"
     },
     "engines": {
         "node": ">=8.0.0"
@@ -48,6 +58,7 @@
         "express-oauth2-jwt-bearer": "^1.1.0",
         "express-session": "^1.17.2",
         "express-winston": "^4.2.0",
+        "multer": "^1.4.4",
         "node-fetch": "^2.6.7",
         "reflect-metadata": "^0.1.13",
         "winston": "^3.6.0"

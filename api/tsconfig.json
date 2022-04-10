@@ -1,16 +1,12 @@
 {
     "compilerOption":{
-        "target": "es6",
-        "module": "commonjs",
         "declaration": true,
-        "outDir": "dist",
-        "strict": true,
-        "noImplicitReturns": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "resolveJsonModule": true,
-        "noUnusedLocals": true,
-        "experimentalAsyncFunctions": true,
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "dist",//change the output directory
+        "resolveJsonModule": true, //to import out json database
         "allowSyntheticDefaultImports": true,
         "lib": [
             "es6",

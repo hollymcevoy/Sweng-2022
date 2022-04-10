@@ -1,9 +1,11 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import React, { Component } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
-import Select from 'react-select';
-import { qnadummy } from '../qnadummy';
 import axios from 'axios';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import { Grid, Box, Card, CardContent, CardActions, Button, Typography, CardActionArea } from '@mui/material';
 class QnAAccordion extends Component {
   constructor(props){
     super(props)
@@ -11,7 +13,7 @@ class QnAAccordion extends Component {
       documentsList : [],
       documentName: '',
       documentSource: [{label: 'comp sci', source:'comp.txt'}],
-      qnas: [{question: 'what is the meaning of life?', answer: '42'}],
+      qnas: [{question: 'what is the meaning of life?', answer: '42'}, {question: 'what is the meaning of life?', answer: '42'}],
     }
   }
   componentDidMount(){
@@ -22,7 +24,7 @@ class QnAAccordion extends Component {
     this.setState({documentName:e.label, documentSource:e.source})
    }
   async getDocuments (){
-    const response = await axios.get('http://localhost:3000/v1/documents');
+    const response = await axios.get('https://sweng-api-node.azurewebsites.net/v1/documents');
     const documents = response.data.value;
 
     const documentsList = documents.reduce((res, doc) => {
@@ -37,35 +39,40 @@ class QnAAccordion extends Component {
   async getQuestions (){
     const docName = this.state.documentName;
     console.log(docName)
-    const response = await axios.get(`http://localhost:3000/v1/questions?docName=SwengQNA`);
+    const response = await axios.get(`https://sweng-api-node.azurewebsites.net/v1/questions?docName=SwengQNA`);
     const questions = response.data.question;
     this.setState({questions: questions})
   }
   render() {
     return (
       <div>
-        <Select options={this.state.documentsList} onChange={this.handleChange.bind(this)} />
-
-        <Accordion className="Accordion" defaultActiveKey="0">
-            <div>
-              {this.state.qnas.map((data, key) => {
-                return (
-                  <div key={key}>
-                    <Accordion.Item eventKey={key+1}>
-                      <Accordion.Header>
-                        {data.question}
-                      </Accordion.Header>
-                          
-                      <Accordion.Body>
-                      {data.answer}
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </div>
-                );
-              })}
-            </div>
-          </Accordion>
-      
+          <Grid container  alignItems="center" style={{marginTop: "10vh"}}>
+            <Box m="auto" >
+              <List
+                sx={{
+                  width: '100%',
+                  maxWidth: 360,
+                  bgcolor: 'grey.100',
+                  position: 'relative',
+                  overflow: 'auto',
+                  maxHeight: 300,
+                  '& ul': { padding: 0 },
+                }}>
+                <ListSubheader>
+                  <Typography variant="h6">
+                    QnA
+                  </Typography>
+                </ListSubheader>
+                {this.state.qnas.map((data, key) => {
+                  return (
+                    <ListItem key={key}>
+                      <ListItemText primary={data.question} secondary={data.answer} />
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Box>
+          </Grid>
       </div>
     );
   }

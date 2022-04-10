@@ -1,12 +1,9 @@
-import NavbarComp from '../components/NavbarComp';
-import LoginButton from '../components/LoginButton';
-import LogoutButton from '../components/LogoutButton';
 import Profile from '../components/profile';
-
+import NavBar from '../components/TheNavbar';
 function About() {
   return (
     <div>
-      <NavbarComp />
+       <NavBar />
       <Profile />
     </div>
   );
