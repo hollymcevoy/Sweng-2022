@@ -7,6 +7,7 @@ import Upload from './views/Upload';
 import Chatbot from './views/Chatbot';
 import Account from './views/Account2';
 import AddQuestion from './components/AddQuestion';
+import Questions from './views/Questions';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import {
   Route,
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path="/about" element={<About />} />
             <Route path="/account" element={<ProtectedRoute component={Account} />} />
             <Route path="/editknowledgebase" element={<ProtectedRoute component={AddQuestion} />} />
+            <Route path="/questions" element={<Questions />} />
           </Routes>
         </div>
       </div>

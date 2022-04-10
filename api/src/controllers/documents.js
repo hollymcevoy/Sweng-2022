@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.deleteDocuments = exports.updateDocuments = exports.getDocuments = exports.postDocuments = exports.getDocumentStatus = exports.getDocument = exports.postDocument = void 0;
+exports.deleteDocuments = exports.updateDocuments = exports.getDocuments = exports.postDocuments = exports.postFile = exports.getQnas = exports.addFileToKB = exports.postUrl = exports.getDocumentStatus = exports.postDocument = void 0;
 var logger_1 = require("../utilities/logger");
 var bb = require("busboy");
 var node_fetch_1 = require("node-fetch");
@@ -45,14 +45,6 @@ var node_fetch_1 = require("node-fetch");
 exports.postDocument = function (req, res, next) {
     try {
         return res.status(201).send("Added Document");
-    }
-    catch (error) {
-        return res.status(500).send(error);
-    }
-};
-exports.getDocument = function (req, res, next) {
-    try {
-        return res.status(200).send("Returned Document");
     }
     catch (error) {
         return res.status(500).send(error);
@@ -89,15 +81,176 @@ exports.getDocumentStatus = function (req, res, next) { return __awaiter(void 0,
         }
     });
 }); };
-exports.postDocuments = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var fileName, fileSize, fileUrl, busboy, DataFile_1, documentName, api_key, azureData, error_2;
+exports.postUrl = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var url, displayName, api_key, azureData, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
+                url = req.body.data.url;
+                displayName = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").replace(/\.\w+$/, "");
+                api_key = process.env.AZURE_KEY;
+                return [4 /*yield*/, node_fetch_1["default"]("https://sweng-cog.cognitiveservices.azure.com/language/query-knowledgebases/projects/SwengQNA/sources?api-version=2021-10-01", {
+                        method: "PATCH",
+                        headers: {
+                            'OCP-APIM-Subscription-Key': api_key,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify([
+                            {
+                                "op": "add",
+                                "value": {
+                                    "displayName": displayName,
+                                    "sourceUri": url,
+                                    "sourceKind": "url"
+                                }
+                            }
+                        ])
+                    })];
+            case 1:
+                azureData = _a.sent();
+                return [2 /*return*/, res.status(200).send("Added " + displayName + " to the SwengQNA Knowledgebase")];
+            case 2:
+                error_2 = _a.sent();
+                return [2 /*return*/, res.status(500).send(error_2)];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.addFileToKB = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var api_key, originalname, storageUrl, azureData, error_3;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                api_key = process.env.AZURE_KEY;
+                originalname = (_a = req.body.data, _a.originalname), storageUrl = _a.storageUrl;
+                return [4 /*yield*/, node_fetch_1["default"]("https://sweng-cog.cognitiveservices.azure.com/language/query-knowledgebases/projects/SwengQNA/sources?api-version=2021-10-01", {
+                        method: 'PATCH',
+                        headers: {
+                            'OCP-APIM-Subscription-Key': api_key,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify([
+                            {
+                                "op": "add",
+                                "value": {
+                                    "displayName": originalname,
+                                    "sourceUri": storageUrl,
+                                    "sourceKind": "url"
+                                }
+                            }
+                        ])
+                    })];
+            case 1:
+                azureData = _b.sent();
+                if (azureData.status == 202) {
+                    console.log(azureData);
+                    return [2 /*return*/, res.status(200).send({
+                            message: "Added " + originalname + " to the SwengQNA Knowledgebase"
+                        })];
+                }
+                else {
+                    console.log(azureData);
+                    return [2 /*return*/, res.status(500).send(azureData.error)];
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _b.sent();
+                return [2 /*return*/, res.status(500).send(error_3)];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getQnas = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var source, top_1, skip, api_key, azureData, azureDataJson, error_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                source = req.query.source;
+                top_1 = 5;
+                skip = 0;
+                api_key = process.env.AZURE_KEY;
+                return [4 /*yield*/, node_fetch_1["default"]("https://sweng-cog.cognitiveservices.azure.com/language/query-knowledgebases/projects/SwengQNA/qnas?api-version=2021-10-01&source=" + source + "&top=" + top_1 + "&skip=" + skip, {
+                        method: 'GET',
+                        headers: {
+                            'OCP-APIM-Subscription-Key': api_key,
+                            'Content-Type': 'application/json'
+                        }
+                    })];
+            case 1:
+                azureData = _a.sent();
+                return [4 /*yield*/, azureData.json()];
+            case 2:
+                azureDataJson = _a.sent();
+                if (azureData.status === 404) {
+                    return [2 /*return*/, res.status(404).send("Error: " + azureDataJson.error.message)];
+                }
+                return [2 /*return*/, res.status(200).send(azureDataJson)];
+            case 3:
+                error_4 = _a.sent();
+                return [2 /*return*/, res.status(500).send(error_4)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.postFile = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var file, fieldname, originalname, encoding, mimetype, size, url, blob, storageUrl, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                file = req['file'];
+                fieldname = file.fieldname, originalname = file.originalname, encoding = file.encoding, mimetype = file.mimetype, size = file.size;
+                url = "https://swengfiles.blob.core.windows.net/swengfiles/" + originalname + "?sv=2020-08-04&ss=bf&srt=o&sp=wac&se=2023-04-08T23:42:20Z&st=2022-04-08T15:42:20Z&spr=https,http&sig=z6HJ0ZnMl3zRViLLzQNKYv4nebVQzeyjXtTZpqvnd5w%3D";
+                return [4 /*yield*/, node_fetch_1["default"](url, {
+                        method: 'PUT',
+                        headers: {
+                            'x-ms-blob-type': 'BlockBlob'
+                        },
+                        body: file
+                    })];
+            case 1:
+                blob = _a.sent();
+                if (blob.status === 404 || blob.status === 400 || blob.status === 500) {
+                    return [2 /*return*/, res.status(500).send("Internal Server Error " + blob.status + " " + blob.statusText)];
+                }
+                return [4 /*yield*/, blob.url
+                    // strip out any queries from the url leaving only the base url
+                ];
+            case 2:
+                storageUrl = _a.sent();
+                // strip out any queries from the url leaving only the base url
+                storageUrl = storageUrl.split('?')[0];
+                return [2 /*return*/, res.status(200).send({
+                        storageUrl: storageUrl,
+                        originalname: originalname,
+                        encoding: encoding,
+                        mimetype: mimetype,
+                        size: size
+                    })];
+            case 3:
+                error_5 = _a.sent();
+                console.log(error_5);
+                return [2 /*return*/, res.status(500).send(error_5)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.postDocuments = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var fileName, fileSize, fileUrl, busboy, DataFile_1, documentName, api_key, azureData, error_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                // add file type and size filter
+                // needs improvements
+                console.log(req.headers.accept);
                 fileName = req.body.fileName;
                 fileSize = req.body.fileSize;
-                fileUrl = req.body.fileUrl;
+                fileUrl = req.body.url;
                 busboy = bb({ headers: req.headers });
                 DataFile_1 = '';
                 // parse the multipart/form-data using busboy for typescript 
@@ -128,7 +281,7 @@ exports.postDocuments = function (req, res, next) { return __awaiter(void 0, voi
                                 "value": {
                                     "displayName": documentName,
                                     "sourceUri": fileUrl,
-                                    "sourceKind": "url"
+                                    "sourceKind": "file"
                                 }
                             }
                         ])
@@ -145,15 +298,15 @@ exports.postDocuments = function (req, res, next) { return __awaiter(void 0, voi
                 }
                 return [3 /*break*/, 3];
             case 2:
-                error_2 = _a.sent();
-                console.log(error_2);
-                return [2 /*return*/, res.status(500).send(error_2)];
+                error_6 = _a.sent();
+                console.log(error_6);
+                return [2 /*return*/, res.status(500).send(error_6)];
             case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.getDocuments = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var documentName, api_key, azureData, azureDataJson, error_3;
+    var documentName, api_key, azureData, azureDataJson, error_7;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -185,9 +338,9 @@ exports.getDocuments = function (req, res, next) { return __awaiter(void 0, void
                 }
                 return [3 /*break*/, 4];
             case 3:
-                error_3 = _a.sent();
-                logger_1.APILogger.logger.info("" + error_3);
-                return [2 /*return*/, res.status(500).send(error_3)];
+                error_7 = _a.sent();
+                logger_1.APILogger.logger.info("" + error_7);
+                return [2 /*return*/, res.status(500).send(error_7)];
             case 4: return [2 /*return*/];
         }
     });
