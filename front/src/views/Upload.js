@@ -7,28 +7,52 @@ import axios from 'axios';
 
 function Upload() {
 
+  // state for some url
+  const [url, setUrl] = useState('');
   
   const [file, setFile] = useState()
 
   function handleChange(event) {
     setFile(event.target.files[0])
   }
+  function handleUrl() {
+    const url = "https://sweng-api-node.azurewebsites.net/v1/documents/url";
+
+    const config = {
+      content: 'application/json',
+      data: {
+        url: 'https://www.google.com/'
+      }
+    }
+    axios.post(url, config)
+
+  }
   
   function handleSubmit(event) {
     event.preventDefault()
-    const url = 'https://sweng-api-node.azurewebsites.net/v1/documents';
-    const formData = new FormData();
+    const url = 'https://sweng-api-node.azurewebsites.net/v1/documents/storage';
 
+    const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', file.name);
+
     const config = {
       headers: {
-        'content-type': 'multipart/form-data',
-        
-      },
-    };
-    axios.post(url, formData, config).then((response) => {console.log(response.data);});
-
+        'content-type': 'multipart/form-data'
+      }
+    }
+    axios.post(url, formData, config).then(async (res) => { 
+      const kb_url = 'https://sweng-api-node.azurewebsites.net/v1/documents/knowledgebase'
+      const kbconfig = {
+        content: 'application/json',
+        data: {
+          originalname: res.data.originalname,
+          storageUrl: res.data.storageUrl
+        }  
+      }
+      const data = await axios.post(kb_url, kbconfig)
+      console.log(data)
+    })
   }
 
   return (
@@ -56,10 +80,18 @@ function Upload() {
                 <Typography variant="h5" component="h2">
                  Paste Url
                 </Typography>
-                <TextField id="outlined-basic" label="Add a URL to a page" variant="outlined" />
+                <TextField 
+                id="outlined-basic"
+                label="Add a URL to a page"
+                variant="outlined"
+                onChange={(e) => setUrl(e.target.value)}
+                
+                />
               </CardContent>
           </Card>
-          <Button onClick={handleSubmit} variant="outlined" style={{ marginTop: "1vh" }}>Add Url</Button>
+          {/* Bind to the inputed text in teh text field and send to a method*/}
+          <Button onClick={() => handleUrl()} variant="outlined" style={{ marginTop: "1vh" }}>Add url</Button>
+
         </Box>
         
       </ Grid>
