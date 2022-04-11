@@ -16,12 +16,10 @@ function Upload() {
     setFile(event.target.files[0])
   }
   function handleUrl() {
-    const url = "https://sweng-api-node.azurewebsites.net/v1/documents/url";
-
     const config = {
       content: 'application/json',
       data: {
-        url: 'https://www.google.com/'
+        url: url
       }
     }
     axios.post(url, config)
